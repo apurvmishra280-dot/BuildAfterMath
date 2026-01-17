@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📚 Student Management System</h1>
+            <p>Manage student records and marks efficiently</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Menu Section -->
+            <div class="menu-section">
+                <h2>Select an Option</h2>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="showSection('view-students')">
+                        <span class="icon">👥</span> View Student IDs
+                    </button>
+                    <button class="btn btn-success" onclick="showSection('admission')">
+                        <span class="icon">➕</span> New Admission
+                    </button>
+                    <button class="btn btn-info" onclick="showSection('check-marks')">
+                        <span class="icon">📊</span> Check Marks
+                    </button>
+                    <button class="btn btn-warning" onclick="showSection('store-marks')">
+                        <span class="icon">💾</span> Store Marks
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Students Section -->
+            <section id="view-students" class="section hidden">
+                <h2>Student List</h2>
+                <div class="student-list" id="studentList"></div>
+                <button class="btn btn-secondary" onclick="showSection('menu-section')">← Back</button>
+            </section>
+
+            <!-- Admission Section -->
+            <section id="admission" class="section hidden">
+                <h2>Add New Student</h2>
+                <form onsubmit="addStudent(event)" class="form">
+                    <div class="form-group">
+                        <label for="studentName">Student Name:</label>
+                        <input type="text" id="studentName" placeholder="Enter student's name" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">✓ Add Student</button>
+                </form>
+                <div id="admissionMessage" class="message"></div>
+                <button class="btn btn-secondary" onclick="showSection('menu-section')">← Back</button>
+            </section>
+
+            <!-- Check Marks Section -->
+            <section id="check-marks" class="section hidden">
+                <h2>Check Student Marks</h2>
+                <div class="check-marks-content">
+                    <div class="form-group">
+                        <label for="studentSelect">Select Student:</label>
+                        <select id="studentSelect" onchange="displayMarks()">
+                            <option value="">-- Choose a student --</option>
+                        </select>
+                    </div>
+                    <div id="marksDisplay" class="marks-display hidden">
+                        <h3>Marks: <span id="marksValue"></span></h3>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="showSection('menu-section')">← Back</button>
+            </section>
+
+            <!-- Store Marks Section -->
+            <section id="store-marks" class="section hidden">
+                <h2>Store Student Marks</h2>
+                <form onsubmit="storeMarks(event)" class="form">
+                    <div class="form-group">
+                        <label for="marksStudent">Select Student:</label>
+                        <select id="marksStudent" required>
+                            <option value="">-- Choose a student --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="marksValue">Enter Marks:</label>
+                        <input type="number" id="marksValue" placeholder="Enter marks" min="0" max="500" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">💾 Store Marks</button>
+                </form>
+                <div id="storeMessage" class="message"></div>
+                <button class="btn btn-secondary" onclick="showSection('menu-section')">← Back</button>
+            </section>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary-section">
+            <h3>Summary</h3>
+            <p>Total Students: <span id="totalStudents">5</span></p>
+            <button class="btn btn-small" onclick="exportData()">📥 Export Data</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
